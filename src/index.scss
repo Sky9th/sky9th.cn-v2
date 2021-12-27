@@ -14,11 +14,18 @@ code {
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css");
 
-$blue: #00a0e9;
+$blue: rgba(0, 160, 233, 0.38);
 
 body {
   color: #666;
   background: #f6f7fa;
+}
+a {
+  color: #666;
+}
+a:hover {
+  opacity: .6;
+  text-decoration: none;
 }
 
 .header {
@@ -29,6 +36,7 @@ body {
   .logo {
     height: 2rem;
   }
+  .disabled { color: #ddd; cursor: default }
   .menu {
     margin-left: 1.5rem;
     display: flex;
@@ -79,11 +87,16 @@ body {
       background: $blue;
       border-radius: 1.25rem;
       font-size: 1.25rem;
+      padding: 0;
+      border: 0;
+      a { color: #fff; }
+      a:hover { text-decoration: none }
     }
     .link-item:last-child {
       color: $blue;
       background: #fff;
       border: 1px solid $blue;
+      a { color: $blue }
     }
   }
 }
@@ -139,6 +152,7 @@ body {
     margin-top: 2rem;
     display: flex;
     .feature-item {
+      position: relative;
       width: 22%;
       margin-right: 4%;
       background: #fff;
@@ -147,6 +161,12 @@ body {
       .img {
         width: 100%;
         background: #f1f1f1;
+        overflow: hidden;
+        border-radius: 50%;
+        font-size: 3rem;
+        line-height: 3rem;
+        padding: 2.6rem 0;
+        color: #fff;
       }
       .icon {
         font-size: 4rem;
@@ -161,6 +181,20 @@ body {
         line-height: 1.6rem;
         color: #848484
       }
+    }
+    .feature-item.hang-on:after {
+      content:'敬请期待';
+      position: absolute;
+      left: 0;
+      top: 30%;
+      width: 100%;
+      height: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background: rgba(237, 237, 237, 0.38);
+      color: $blue;
     }
     .feature-item:last-child { margin-right: 0; }
   }
@@ -213,5 +247,5 @@ body {
 .copyright {
   text-align: center;
   padding: 3em 0 3rem 0;
-  font-size: 1.5rem
+  font-size: 1rem
 }
