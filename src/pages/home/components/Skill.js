@@ -78,14 +78,14 @@ export default () => (
                     <div className={"desc"}><a href="https://www.php.net/">https://www.php.net/</a></div>
                 </div>
             </li>
-            <li className={"item"} style={{color:"#000",marginRight:"auto"}}>
+            <li className={"item"} style={{color:"#000"}}>
                 <div className={"icon"}><i className="bi bi-ui-checks-grid"></i></div>
                 <div className={"content"}>
                     <div className={"title"}>C#</div>
                     <div className={"desc"}><a href="https://docs.microsoft.com/en-us/dotnet/csharp/">https://docs.microsoft.com/en-us/dotnet/csharp/</a></div>
                 </div>
             </li>
-            <li className={"item"} style={{color:"#000",marginRight:"auto"}}>
+            <li className={"item"} style={{color:"#000",opacity:0}}>
                 <div className={"icon"}><i className="bi bi-ui-checks-grid"></i></div>
                 <div className={"content"}>
                     <div className={"title"}>C#</div>

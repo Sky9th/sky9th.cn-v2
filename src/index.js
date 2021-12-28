@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+
+import App from './pages/home/App';
+import Chat from "./pages/chat/Chat";
 
 ReactDOM.render(
     <BrowserRouter>
         <Routes>
             <Route element={<App />} path="/"></Route>
+            <Route element={<Chat />} path="/chat"></Route>
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')

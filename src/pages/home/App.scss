@@ -1,0 +1,185 @@
+@import "../../index";
+
+.banner {
+  flex-direction: column;
+  margin-top: 9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .title {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+  .desc {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+  }
+  .link {
+    margin-top: 2rem;
+    display: flex;
+    .link-item:first-child { margin-right: 1.5rem; }
+    .link-item {
+      width: 10rem;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      text-align: center;
+      color: #fff;
+      background: $blue;
+      border-radius: 1.25rem;
+      font-size: 1.25rem;
+      padding: 0;
+      border: 0;
+      a { color: #fff; }
+      a:hover { text-decoration: none }
+    }
+    .link-item:last-child {
+      color: $blue;
+      background: #fff;
+      border: 1px solid $blue;
+      a { color: $blue }
+    }
+  }
+}
+
+.git {
+  margin-top: 11rem;
+  .git-item {
+    display: flex;
+    .git-img {
+      color: #c59cfe;
+      width: 50%;
+      text-align: center;
+      font-size:12rem;
+      border-radius: 1rem;
+    }
+    .git-content {
+      padding: 0 4rem;
+      margin-top: 1rem;
+      width: 50%;
+      .git-title {
+        color: $blue;
+        font-size: 3rem;
+      }
+      .git-desc {
+        font-size: 1.25rem;
+        margin-top: 1rem;
+      }
+      .git-icon {
+        margin-top: 1rem;
+        img { margin-right: .3rem }
+      }
+    }
+  }
+  .git-item:last-child {
+    flex-direction: row-reverse;
+    margin-top: 5rem;
+    .git-img {
+      color: #228de6;
+    }
+  }
+}
+
+.feature {
+  margin-top: 10rem;
+  text-align: center;
+  .feature-title {
+    h3 {
+      font-size: 3rem;
+      font-weight: 500;
+    }
+  }
+  .feature-item-list {
+    margin-top: 2rem;
+    display: flex;
+    .feature-item {
+      position: relative;
+      width: 22%;
+      margin-right: 4%;
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem;
+      .img {
+        width: 100%;
+        background: #f1f1f1;
+        overflow: hidden;
+        border-radius: 50%;
+        font-size: 3rem;
+        line-height: 3rem;
+        padding: 2.6rem 0;
+        color: #fff;
+      }
+      .icon {
+        font-size: 4rem;
+        color: $blue;
+        text-align: center;
+      }
+      .title {
+        font-size: 2rem;
+      }
+      .desc {
+        margin-top: 1rem;
+        line-height: 1.6rem;
+        color: #848484
+      }
+    }
+    .feature-item.hang-on:after {
+      content:'敬请期待';
+      position: absolute;
+      left: 0;
+      top: 30%;
+      width: 100%;
+      height: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background: rgba(237, 237, 237, 0.38);
+      color: $blue;
+    }
+    .feature-item:last-child { margin-right: 0; }
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 1.5rem;
+    .item {
+      margin-right:auto;
+      padding: 1rem 1.5rem;
+      background: #fff;
+      border-radius: 1rem;
+      display: flex;
+      margin-bottom: 1.5rem;
+      width: calc(33.3% - 1rem);
+      .icon { font-size: 3rem;margin-right: 1.5rem }
+      .content {
+        text-align: left;
+        .title { font-size: 1.8rem; }
+        .desc {}
+      }
+    }
+  }
+}
+
+.footer-container {
+  margin-top: 10rem;
+  background: #fff;
+  max-width: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  .footer {
+    width: 70%;
+    text-align: center;
+    padding: 6rem 0;
+    .title { font-size: 2.8rem }
+    .desc { font-size: 1.9rem;margin-top: 4.8rem; }
+    .link { display: inline-block; margin-top: 3rem;height: 5.5rem;line-height: 5.5rem;width: 15rem;background: $blue;color:#fff;font-size:2.5rem; border-radius: 1rem }
+  }
+}

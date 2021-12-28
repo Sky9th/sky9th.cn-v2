@@ -1,18 +1,17 @@
 import React from "react";
+import './App.scss'
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import Top from './components/Top'
+import Top from '../../components/Top'
 import Banner from "./components/Banner";
 import Git from "./components/Git";
 import Feature from "./components/Feature";
 import Project from "./components/Project";
 import Skill from "./components/Skill";
 import Footer from "./components/Footer";
-
-import {useParams, useLocation} from "react-router-dom";
 
 const App = () => (
     <div>
