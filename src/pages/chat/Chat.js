@@ -6,8 +6,9 @@ import {Row, Col} from "react-bootstrap";
 import Room from "./components/Room";
 import Top from "../../components/Top";
 import People from "./components/People";
+import Tag from "./components/Tag";
 
-export default () => (
+const Chat = () => (
     <div>
         <div className={"chat"}>
             <Top/>
@@ -18,7 +19,10 @@ export default () => (
             </Col>
             <Col>
                 <People></People>
+                <Tag></Tag>
             </Col>
         </Row>
     </div>
 );
+
+export default Chat;

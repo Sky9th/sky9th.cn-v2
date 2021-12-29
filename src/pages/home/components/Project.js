@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const Project = () => (
     <div className={"feature"}>
         <div className={"feature-title"}>
             <h3>相关项目</h3>
@@ -22,3 +22,5 @@ export default () => (
         </div>
     </div>
 )
+
+export default Project;

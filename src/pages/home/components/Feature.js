@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const Feature = () => (
     <div className={"feature"}>
         <div className={"feature-title"}>
             <h3>基础功能</h3>
@@ -30,3 +30,5 @@ export default () => (
         </div>
     </div>
 )
+
+export default Feature;

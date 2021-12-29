@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const Git = () => (
     <div className={"git"}>
         <div className={"git-item"}>
             <div className={"git-img"}><i className={"bi bi-tv"}></i></div>
@@ -31,3 +31,5 @@ export default () => (
         </div>
     </div>
 )
+
+export default Git;
