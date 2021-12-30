@@ -2,6 +2,7 @@ import axios from "axios";
 import { apiList } from '../config/api'
 import env from '../config/env'
 import util from '../util/util'
+import store from "./store/store";
 
 export var apiConfig = {
     // `url` is the server URL that will be used for the request
@@ -103,7 +104,24 @@ const http = {
             return config;
         }, function (error) {
             // Do something with request error
+            console.log('--------stop endpoint----------');
+            that.hideLoading();
+            return Promise.reject(error);
+        });
+
+        instance.interceptors.response.use(function (response) {
+            // Any status code that lie within the range of 2xx cause this function to trigger
+            // Do something with response data
+            console.log('--------done endpoint----------');
+            that.hideLoading();
+            return response;
+        }, function (error) {
+            // Any status codes that falls outside the range of 2xx cause this function to trigger
+            // Do something with response error
             console.log('--------error endpoint----------');
+            let data = error.response.data;
+            store.dispatch({type:'notice/noticePush', payload: {title:'错误', msg: data.msg}})
+            that.hideLoading();
             return Promise.reject(error);
         });
 
@@ -127,10 +145,10 @@ const http = {
     },
 
     showLoading () {
-        // this.loading = Loading.service();
+        document.getElementById('loading').style.display = 'flex'
     },
     hideLoading () {
-        // if(this.loading) this.loading.close()
+        document.getElementById('loading').style.display = 'none'
     }
 }
 

@@ -21,7 +21,6 @@ encrypt.makeSignature = function (nonceStr, timestamp) {
         nonceStr: nonceStr,
         key: env[process.env.NODE_ENV].key || ''
     }
-    console.log(param)
     let str = JSON.stringify(param)
     return crypt.encrypt(str)
 }

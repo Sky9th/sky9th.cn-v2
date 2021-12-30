@@ -11,6 +11,10 @@ export var apiList = {
         'login': {
             url: 'user/login',
             method: 'post'
+        },
+        'verify': {
+            url: 'user/getVerify',
+            method: 'post'
         }
     }
     ,

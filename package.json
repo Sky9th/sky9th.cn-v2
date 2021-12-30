@@ -43,6 +43,10 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.24.0"
+    "@reduxjs/toolkit": "^1.7.1",
+    "axios": "^0.24.0",
+    "formik": "^2.2.9",
+    "react-redux": "^7.2.6",
+    "yup": "^0.32.11"
   }
 }
