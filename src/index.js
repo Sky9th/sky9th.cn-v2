@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 
@@ -11,6 +11,21 @@ import Loading from "./components/Loading";
 import store from "./services/store/store";
 import { Provider } from 'react-redux';
 import Notice from "./components/Notice";
+import Fingerprint2 from "fingerprintjs2";
+import {setFingerprint, setSessionKey} from "./services/store/reducer/profileReducer";
+import util from "./util/util";
+
+Fingerprint2.get({}, function (components) {
+    let values = components.map(function (component) { return component.value })
+    let murmur = Fingerprint2.x64hash128(values.join(''), 31)
+    store.dispatch(setFingerprint(murmur))
+})
+
+const sessionKey = util.cookies.get('sessionKey');
+if (sessionKey) {
+    console.log(sessionKey)
+    store.dispatch(setSessionKey(sessionKey));
+}
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import notice from "./reducer/noticeReducer";
+import noticeSlice from "./reducer/noticeReducer";
+import profileSlice from "./reducer/profileReducer";
 
-export default configureStore({
+const store = configureStore({
     reducer: {
-        notice: notice
+        notice: noticeSlice,
+        profile: profileSlice
     }
 })
+
+export default store;

@@ -1,9 +1,5 @@
 export var apiList = {
     "development": {
-        'index': {
-            url: 'sky9th/index',
-            method: 'get'
-        },
         'register': {
             url: 'user/register',
             method: 'post'
@@ -12,8 +8,24 @@ export var apiList = {
             url: 'user/login',
             method: 'post'
         },
+        'userInfo': {
+            url: 'user/info',
+            method: 'get'
+        },
         'verify': {
             url: 'user/getVerify',
+            method: 'post'
+        },
+        'captcha': {
+            url: 'user/captcha',
+            method: 'post'
+        },
+        'chat/index': {
+            url: 'chat/index',
+            method: 'get'
+        },
+        'chat/submit': {
+            url: 'chat/msg',
             method: 'post'
         }
     }
