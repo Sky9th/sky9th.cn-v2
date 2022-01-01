@@ -12,6 +12,10 @@ export var apiList = {
             url: 'user/info',
             method: 'get'
         },
+        'setNickname': {
+            url: 'user/setNickname',
+            method: 'post'
+        },
         'verify': {
             url: 'user/getVerify',
             method: 'post'
@@ -27,6 +31,14 @@ export var apiList = {
         'chat/submit': {
             url: 'chat/msg',
             method: 'post'
+        },
+        'chat/people': {
+            url: 'chat/people',
+            method: 'get'
+        },
+        'chat/tag': {
+            url: 'chat/tag',
+            method: 'get'
         }
     }
     ,

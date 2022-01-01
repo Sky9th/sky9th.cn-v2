@@ -17,12 +17,12 @@ const Top = () => {
     }
 
     useEffect(() => {
-        console.log(sessionKey)
         if (sessionKey) {
             http.$('userInfo').then((data) => {
                 dispatch({type:'profile/setUserInfo', payload: data.data})
             })
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sessionKey])
 
     return <div className={"header"}>

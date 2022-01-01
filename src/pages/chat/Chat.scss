@@ -28,8 +28,15 @@
           .name {
             font-weight: bold;
           }
+          .tag {
+            margin-left: .5rem;
+            .badge {
+              font-weight: normal;
+              font-size:50%;
+            }
+          }
           .time {
-            margin-left: 1rem;
+            margin-left: .5rem;
             color: #999
           }
           .dropdown {
@@ -58,8 +65,8 @@
             cursor: pointer;
             margin-bottom: 1rem;
             img {
+              max-height: 10rem;
               max-width: 100%;
-              max-height: 100%;
             }
           }
           .attach-item:hover {
@@ -81,10 +88,9 @@
   .room-input {
     height: 100px;
     padding: 1rem 2rem;
-    box-sizing: border-box;
     display: flex;
     border-top: 1px solid #e9e9e9;
-
+    justify-content: space-between;
     .avatar {
       width: 2rem;
       height: 2rem;
@@ -100,7 +106,7 @@
     }
     .input {
       margin-left: 1rem;
-      width: calc(100% - 2rem);
+      width: calc(100%);
       textarea {
         width: 100%;
         height: 100%;
@@ -109,6 +115,17 @@
       textarea:focus {
         outline: none;
         border: 0;
+      }
+    }
+    .control {
+      display: flex;
+      width: 5rem;
+      flex-direction: column;
+      justify-content: right;
+      margin-left: 1rem;
+      .btn {
+        margin-bottom: .5rem;
+        width: 4.5rem;
       }
     }
   }
@@ -129,7 +146,8 @@
     .item {
       width: 2.16rem;
       height: 2.16rem;
-      background: #e9e9e9;
+      font-size: 2.16rem;
+      line-height: 2.16rem;
       border-radius: 50%;
       margin-right: .5rem;
       margin-bottom: .5rem;

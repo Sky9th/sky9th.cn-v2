@@ -4,20 +4,30 @@ import Dropdown from "react-bootstrap/Dropdown";
 import http from "../../../services/http";
 import {useSelector} from "react-redux";
 import env from "../../../config/env";
+import Button from "react-bootstrap/Button";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Badge from "react-bootstrap/Badge";
 
 const ListItem = (props) => {
     return (<div className={"room-item"}>
         <div className={"avatar"}><i className="bi bi-person-circle"></i></div>
         <div className={"content"}>
             <div className={"info"}>
-                <span className={"name"}>{props.value.user.mail}</span>
+                <span className={"name"}>{props.value.user.nickname}</span>
+                <span className={"tag"}>
+                    {props.tagList.map((value, index) => {
+                        if(value.id === props.value.tag){
+                            return <Badge key={index} pill variant={value.mark}>{value.title}</Badge>
+                        }
+                        return "";
+                    })}
+                </span>
                 <span className={"time"}>{props.value.create_time}</span>
                 <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic"><i className="bi bi-three-dots"></i></Dropdown.Toggle>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic" disabled><i className="bi bi-three-dots"></i></Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item href="#/action-1">回复</Dropdown.Item>
                         <Dropdown.Item href="#/action-2">删除</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">收藏</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
@@ -26,7 +36,7 @@ const ListItem = (props) => {
             </div>
             {props.value.reply && props.value.reply.length > 0 && <div className={"reply"}>
                 { props.value.reply.map((value, index) => {
-                    return <ListItem key={index} value={value} />
+                    return <ListItem key={index} value={value} tagList={props.tagList} />
                 })}
             </div>}
             {props.value.pictures && props.value.pictures.length > 0 && <div className={"attach"}>
@@ -40,9 +50,12 @@ const ListItem = (props) => {
     </div>)
 }
 
-const Room = () => {
+const Room = (props) => {
+    const {tagList} = props;
     const [chatHeight, setChatHeight] = useState(window.innerHeight - 190);
     const [listItem, setListItem] = useState([])
+    const [tag, setTag] = useState('闲聊')
+    const [tagID, setTagID] = useState('1')
     const userInfo = useSelector(state => state.profile.userInfo)
     const room = createRef();
 
@@ -56,21 +69,22 @@ const Room = () => {
         }
     }, [])
 
+    const submitMsg = (event, click) => {
+        if((event.code === 'Enter' && event.ctrlKey === true && msg !== '') || click){
+            http.$('chat/submit', {content: msg, tag: tagID}).then(() => {
+                setMsg('');
+                getMsg();
+            })
+        }
+    }
+
     useEffect(() => {
         room.current.scrollTop = room.current.scrollHeight
-        const submitMsg = (event) => {
-            if(event.code === 'Enter' && event.ctrlKey === true && msg !== ''){
-                http.$('chat/submit', {content: msg, type: 0}).then(() => {
-                    setMsg('');
-                    room.current.scrollTop = room.current.scrollHeight
-                    getMsg();
-                })
-            }
-        }
         window.addEventListener('keydown', submitMsg)
         return function cleanup() {
             window.removeEventListener('keydown', submitMsg)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [msg, room])
 
     const getMsg = () => {
@@ -87,18 +101,31 @@ const Room = () => {
         setChatHeight(window.innerHeight - 190)
     }
 
-    return <div ref={room} className={"room"}>
-        <div className={"room-list"} style={{height:chatHeight + 'px'}}>
+    const selectTag = (tag) => {
+        setTag(tag.title)
+        setTagID(tag.id)
+    }
+
+    return <div className={"room"}>
+        <div ref={room} className={"room-list"} style={{height:chatHeight + 'px'}}>
             {listItem.map((value, index) => {
-                return <ListItem key={index} value={value} />
+                return <ListItem key={index} value={value} tagList={tagList} />
             })}
         </div>
         <form>
         <div className={"room-input"}>
             <div className={"avatar"}><i className="bi bi-person-circle"></i></div>
             <div className={"input"}>
-                {userInfo.mail && <textarea placeholder={"点击此处输入您的想要发送的信息"} value={msg} onChange={onChange}></textarea>}
+                {userInfo.mail && <textarea placeholder={"点击此处输入您的想要发送的信息，Ctrl+Enter可快速发送"} value={msg} onChange={onChange}></textarea>}
                 {!userInfo.mail && <div className={"login"}>请先<span>登录</span></div>}
+            </div>
+            <div className={"control"}>
+                <DropdownButton size={"sm"} variant={"dark"} title={tag} drop={"up"}>
+                    {tagList.map((value, index) => {
+                        return <Dropdown.Item key={index} onClick={() => selectTag(value)}>{value.title}</Dropdown.Item>
+                    })}
+                </DropdownButton>
+                <Button size={"sm"} onClick={(e) => submitMsg(e, true)} disabled={!msg}>发送</Button>
             </div>
         </div>
         </form>

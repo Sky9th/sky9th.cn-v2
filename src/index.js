@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 
@@ -23,7 +23,6 @@ Fingerprint2.get({}, function (components) {
 
 const sessionKey = util.cookies.get('sessionKey');
 if (sessionKey) {
-    console.log(sessionKey)
     store.dispatch(setSessionKey(sessionKey));
 }
 
