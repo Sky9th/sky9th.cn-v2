@@ -15,7 +15,6 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import Socket from "../../services/socket"
 
 const Chat = () => {
 

@@ -14,6 +14,9 @@ import Notice from "./components/Notice";
 import Fingerprint2 from "fingerprintjs2";
 import {setFingerprint, setSessionKey} from "./services/store/reducer/profileReducer";
 import util from "./util/util";
+import socket from './services/socket'
+
+console.log(process.env)
 
 Fingerprint2.get({}, function (components) {
     let values = components.map(function (component) { return component.value })
@@ -25,6 +28,8 @@ const sessionKey = util.cookies.get('sessionKey');
 if (sessionKey) {
     store.dispatch(setSessionKey(sessionKey));
 }
+
+socket()
 
 ReactDOM.render(
     <Provider store={store}>
