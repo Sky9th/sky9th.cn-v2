@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import util from "../util/util";
 
 const Socket = () => {
 
@@ -6,17 +7,18 @@ const Socket = () => {
         transports:['websocket']
     });
 
-    socket.on("connect", ($fd) => {
-        console.log('connect')
-        socket.emit('Test1', {asd:"asd"})
-    })
-    
-    socket.on("testcallback", () => {
-        console.log('testcallback')
+    socket.on("connect", (fd) => {
+        console.log('connect', fd)
+        let session = util.encrypt.getSignatureParam()
+        socket.emit('auth', {session})
     })
 
-    socket.on("disconnect", () => {
-        console.log('disconnect')
+    socket.on("disconnect", (reason) => {
+        console.log('disconnect', reason)
+    })
+
+    socket.on("authCb", (data) => {
+        console.log('authCb', data)
     })
 
 
