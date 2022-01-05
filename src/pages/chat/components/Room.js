@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useState} from "react";
+import React, {createRef, forwardRef, useEffect, useImperativeHandle, useState} from "react";
 
 import Dropdown from "react-bootstrap/Dropdown";
 import http from "../../../services/http";
@@ -50,7 +50,7 @@ const ListItem = (props) => {
     </div>)
 }
 
-const Room = (props) => {
+const Room = (props, ref) => {
     const {tagList} = props;
     const [chatHeight, setChatHeight] = useState(window.innerHeight - 190);
     const [listItem, setListItem] = useState([])
@@ -58,11 +58,15 @@ const Room = (props) => {
     const [tagID, setTagID] = useState('1')
     const userInfo = useSelector(state => state.profile.userInfo)
     const room = createRef();
-
     const [msg, setMsg] = useState('')
+
+    useImperativeHandle(ref, () => ({
+        listItem, setListItem, msg, setMsg
+    }))
 
     useEffect(() => {
         getMsg();
+
         window.addEventListener('resize', updateSize)
         return function cleanup() {
             window.removeEventListener('resize', updateSize)
@@ -71,10 +75,12 @@ const Room = (props) => {
 
     const submitMsg = (event, click) => {
         if((event.code === 'Enter' && event.ctrlKey === true && msg !== '') || click){
-            http.$('chat/submit', {content: msg, tag: tagID}).then(() => {
-                setMsg('');
-                getMsg();
-            })
+            // http.$('chat/submit', {content: msg, tag: tagID}).then(() => {
+            //     setMsg('');
+            //     getMsg();
+            // })
+            props.socket.emit('ToAll', {content: msg, tag: tagID})
+            setMsg('')
         }
     }
 
@@ -132,4 +138,4 @@ const Room = (props) => {
     </div>
 };
 
-export default Room;
+export default forwardRef(Room);

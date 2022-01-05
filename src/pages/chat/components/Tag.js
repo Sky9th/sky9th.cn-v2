@@ -12,8 +12,8 @@ const Tag = (props) => {
         <div className={"tag-list"}>
             {tagList.map((value, index) => {
                 return <div key={index} className={"item"}>
-                    <Button variant={value.mark} size={"sm"}>{value.title}</Button>
-                    <span>{value.sum}</span>
+                    <Button variant={value.mark} size={"sm"}>{value.title} <span>{value.sum}</span></Button>
+
                 </div>
             })}
         </div>

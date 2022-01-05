@@ -138,6 +138,10 @@
   flex-direction: column;
   .title {
     font-weight: bold;
+    span {
+      color: $blue;
+      border-bottom: 1px solid $blue;
+    }
   }
   .people-list {
     margin-top: 1rem;
@@ -154,12 +158,9 @@
     }
   }
   .sum {
-    margin-top: .5rem;
-    background: none;
-    border: 0;
-    color: $blue;
+    float: right;
+    margin-top: 0;
     font-weight: bold;
-    padding: 0;
     margin-left: auto;
     span {
       font-weight: normal;
@@ -171,11 +172,14 @@
 .tag {
   .tag-list {
     margin-top: .5rem;
+    display: flex;
+    flex-wrap: wrap;
     .item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: .5rem;
+      margin-right: .5rem;
       span {
         border-bottom: 1px solid #e9e9e9;
       }
