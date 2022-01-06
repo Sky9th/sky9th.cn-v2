@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {Routes, Route, HashRouter} from "react-router-dom";
 
 import App from './pages/home/App';
 import Chat from "./pages/chat/Chat";
@@ -28,14 +28,14 @@ if (sessionKey) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route element={<App/>} path="/"/>
                 <Route element={<Chat/>} path="/chat"/>
             </Routes>
             <Loading />
             <Notice/>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>,
     document.getElementById('root')
 );
