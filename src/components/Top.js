@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Sign from "./Sign";
+import Avatar from "./Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import http from "../services/http";
 
@@ -38,7 +39,7 @@ const Top = () => {
         </div>
         <div className={"profile"}>
             { profile.mail && <div className={"userInfo"}>
-                <i className="bi bi-person-circle"></i>
+                <Avatar avatar={profile.avatar}></Avatar>
                 <span>{profile.mail}</span>
                 <i className="bi bi-box-arrow-left logout" onClick={logout}></i>
             </div>}

@@ -25,7 +25,7 @@ const People = (props) => {
             <div className={"people-list"}>
                 {
                     Object.keys(props.onlineList).map((val, index) => {
-                        return <div className={"item"} key={index}><i className="bi bi-person-circle"></i></div>
+                        return <div className={"item " + (props.onlineList[val].typing ? 'typing' : '')} key={index}><i className="bi bi-person-circle"></i></div>
                     })
                 }
             </div>

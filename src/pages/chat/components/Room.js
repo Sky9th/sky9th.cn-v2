@@ -7,10 +7,11 @@ import env from "../../../config/env";
 import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Badge from "react-bootstrap/Badge";
+import Avatar from "../../../components/Avatar";
 
 const ListItem = (props) => {
     return (<div className={"room-item"}>
-        <div className={"avatar"}><i className="bi bi-person-circle"></i></div>
+        <Avatar avatar={props.value.user.avatar}></Avatar>
         <div className={"content"}>
             <div className={"info"}>
                 <span className={"name"}>{props.value.user.nickname}</span>
@@ -56,6 +57,7 @@ const Room = (props, ref) => {
     const [listItem, setListItem] = useState([])
     const [tag, setTag] = useState('闲聊')
     const [tagID, setTagID] = useState('1')
+    const [typing, setTyping] = useState(false)
     const userInfo = useSelector(state => state.profile.userInfo)
     const room = createRef();
     const [msg, setMsg] = useState('')
@@ -95,12 +97,28 @@ const Room = (props, ref) => {
 
     const getMsg = () => {
         http.$('chat/index').then((data) => {
-            setListItem(data.data)
+            setListItem(data.data.reverse())
         })
     }
 
     const onChange = (event) => {
         setMsg(event.target.value)
+        if (event.target.value.length > 0 && !typing){
+            setTyping(true)
+            props.socket.emit('typing', true)
+        }
+    }
+
+    const onFocus = (event) => {
+        if (event.target.value.length > 0 && !typing){
+            setTyping(true)
+            props.socket.emit('typing', true)
+        }
+    }
+
+    const onBlur = () => {
+        setTyping(false)
+        props.socket.emit('typing', false)
     }
 
     const updateSize = () => {
@@ -122,7 +140,8 @@ const Room = (props, ref) => {
         <div className={"room-input"}>
             <div className={"avatar"}><i className="bi bi-person-circle"></i></div>
             <div className={"input"}>
-                {userInfo.mail && <textarea placeholder={"点击此处输入您的想要发送的信息，Ctrl+Enter可快速发送"} value={msg} onChange={onChange}></textarea>}
+                {userInfo.mail &&
+                <textarea placeholder={"点击此处输入您的想要发送的信息，Ctrl+Enter可快速发送"} value={msg} onChange={onChange} onFocus={onFocus} onBlur={onBlur}></textarea>}
                 {!userInfo.mail && <div className={"login"}>请先<span>登录</span></div>}
             </div>
             <div className={"control"}>

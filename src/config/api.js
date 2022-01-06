@@ -12,8 +12,16 @@ export var apiList = {
             url: 'user/info',
             method: 'get'
         },
+        'avatar': {
+            url: 'user/avatar',
+            method: 'get'
+        },
         'setNickname': {
             url: 'user/setNickname',
+            method: 'post'
+        },
+        'setAvatar': {
+            url: 'user/setAvatar',
             method: 'post'
         },
         'verify': {

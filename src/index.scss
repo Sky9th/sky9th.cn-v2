@@ -28,6 +28,20 @@ a:hover {
   text-decoration: none;
 }
 
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  img {
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
 .header {
   display: flex;
   padding: 1.25rem 0;
@@ -47,8 +61,12 @@ a:hover {
     }
   }
   .userInfo {
-    i { margin:0 .5rem}
+    .avatar {
+      float: left;
+      margin-right: .5rem;
+    }
     .logout {
+      margin-left: .5rem;
       cursor: pointer;
       &:hover {
         opacity: .6;
