@@ -8,6 +8,10 @@ export var apiList = {
             url: 'user/login',
             method: 'post'
         },
+        'setPassword': {
+            url: 'user/setPassword',
+            method: 'post'
+        },
         'userInfo': {
             url: 'user/info',
             method: 'get'
@@ -57,6 +61,10 @@ export var apiList = {
         },
         'login': {
             url: 'user/login',
+            method: 'post'
+        },
+        'setPassword': {
+            url: 'user/setPassword',
             method: 'post'
         },
         'userInfo': {

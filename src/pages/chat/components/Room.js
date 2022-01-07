@@ -82,6 +82,8 @@ const Room = (props, ref) => {
             //     getMsg();
             // })
             props.socket.emit('ToAll', {content: msg, tag: tagID})
+            props.socket.emit('typing', false)
+            setTyping(false)
             setMsg('')
         }
     }

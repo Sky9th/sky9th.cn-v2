@@ -93,7 +93,7 @@ const http = {
             params: param ? param : (method === 'get' ? data : {}),
             data: method !== 'get' ? data : {}
         };
-        let instance = axios.create(Object.assign(apiConfig, env[process.env.NODE_ENV]));
+        let instance = axios.create(Object.assign(apiConfig, env));
 
         instance.interceptors.request.use(function (config) {
             console.log('--------start endpoint----------');
@@ -118,8 +118,8 @@ const http = {
         }, function (error) {
             // Any status codes that falls outside the range of 2xx cause this function to trigger
             // Do something with response error
-            console.log('--------error endpoint----------');
-            let data = error.response.data;
+            console.log('--------error endpoint----------', error.response);
+            let data = error.response ? error.response.data : {};
             store.dispatch({type:'notice/noticePush', payload: {title:'错误', msg: data.msg}})
             that.hideLoading();
             return Promise.reject(error);

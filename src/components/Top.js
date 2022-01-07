@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
-import Sign from "./Sign";
 import Avatar from "./Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import http from "../services/http";
 
 const Top = () => {
 
-    const [showRegister, setShowRegister] = useState(false);
-    const [showLogin, setShowLogin] = useState(false);
     const profile = useSelector(state => state.profile.userInfo)
     const sessionKey = useSelector(state => state.profile.sessionKey)
     const dispatch = useDispatch();
@@ -39,17 +36,15 @@ const Top = () => {
         </div>
         <div className={"profile"}>
             { profile.mail && <div className={"userInfo"}>
-                <Avatar avatar={profile.avatar}></Avatar>
+                <Avatar avatar={profile.avatar} edit={true}></Avatar>
                 <span>{profile.mail}</span>
                 <i className="bi bi-box-arrow-left logout" onClick={logout}></i>
             </div>}
             { !profile.mail && <div className={"profile-menu"}>
-                <div className={"menu-item"} onClick={() => setShowLogin(true)}>登录</div>
-                <div className={"menu-item"} onClick={() => setShowRegister(true)}>注册</div>
+                <div className={"menu-item"} onClick={() => dispatch({type:'modal/setVisible',payload:{modal:'login', visible: true}})}>登录</div>
+                <div className={"menu-item"} onClick={() => dispatch({type:'modal/setVisible',payload:{modal:'register', visible: true}})}>注册</div>
             </div>}
         </div>
-
-        <Sign showRegister={showRegister} showLogin={showLogin} setShowRegister={setShowRegister} setShowLogin={setShowLogin} />
 
     </div>
 };

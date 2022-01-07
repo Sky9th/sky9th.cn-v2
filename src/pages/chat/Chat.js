@@ -29,18 +29,14 @@ const Chat = () => {
     const [tagList, setTagList] = useState([])
     const [onlineList, setOnlineList] = useState([])
     const [typingList, setTypingList] = useState([])
-    const [avatarList, setAvatarList] = useState([])
-    const [avatar, setAvatar] = useState('')
     const [joinUser, setJoinUser] = useState([])
     const [showNickModal, setShowNickModal] = useState(false)
-    const [showAvatarModal, setShowAvatarModal] = useState(false)
     const userInfo = useSelector(state => state.profile.userInfo);
     const dispatch = useDispatch()
     const room = useRef(null)
 
     useEffect(() => {
         getTag();
-        getAvatarList();
         socket.on('connect', () => {
             console.log('-----connect------')
         })
@@ -79,7 +75,7 @@ const Chat = () => {
             if(Object.keys(userInfo).length > 0) setShowNickModal(true)
         } else {
             if (!userInfo.avatar) {
-                setShowAvatarModal(true)
+                util.modal.show('avatar')
             }
             socket.auth = util.encrypt.getSignatureParam()
             socket.connect()
@@ -121,13 +117,6 @@ const Chat = () => {
         })
     }
 
-    const getAvatarList = () => {
-        http.$('avatar').then((data) => {
-            console.log(data.data)
-            setAvatarList(data.data)
-        })
-    }
-
     const formik = useFormik({
         initialValues: {
             nickname: '',
@@ -143,29 +132,9 @@ const Chat = () => {
         },
     });
 
-    const avatarFormik = useFormik({
-        initialValues: {
-            avatar: "",
-        },
-        validationSchema: Yup.object({
-            avatar: Yup.string().required('请选择头像'),
-        }),
-        onSubmit: values => {
-            http.$('setAvatar', values).then(() => {
-                dispatch({type:"profile/setUserInfo", payload:{avatar: values.avatar}})
-                setShowAvatarModal(false)
-            })
-        },
-    });
-
-    const onSetAvatar = (val, v) => {
-        setAvatar('/static/avatar/' + val + '/' + v)
-        avatarFormik.setFieldValue('avatar', '/static/avatar/' + val + '/' + v)
-    }
-
     const handleClose = () => {
         setShowNickModal(false)
-        setShowAvatarModal(false)
+        dispatch({type:'modal/setVisible',payload:{modal:'avatar'}})
     }
 
     return (
@@ -184,7 +153,7 @@ const Chat = () => {
                 </Col>
             </Row>
 
-            <Modal show={showNickModal} onHide={handleClose}>
+            <Modal show={showNickModal} onHide={handleClose} backdrop={"static"}>
                 <Modal.Body>
                     <Form noValidate onSubmit={formik.handleSubmit}>
                         <Form.Group>
@@ -202,32 +171,6 @@ const Chat = () => {
                 </Modal.Body>
             </Modal>
 
-            <Modal show={showAvatarModal} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>选择头像</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {
-                        Object.keys(avatarList).map((val, index) => {
-                            return (
-                                <div className={"avatar-selector"} key={index}>
-                                    {/*<div className={"title"}>{val}</div>*/}
-                                    <div className={"avatar-list"}>
-                                    {Object.keys(avatarList[val]).map((v, i) => {
-                                        return (
-                                            <div key={i} className={"item " + val + (avatar === '/static/avatar/' + val + '/' + avatarList[val][v] ? ' selected' : '')} onClick={()=>{onSetAvatar(val,avatarList[val][v])}}><img src={process.env.REACT_APP_HTTP_HOST + '/static/avatar/' + val + '/' + avatarList[val][v]} width={"50px"} alt={v}/></div>
-                                        )
-                                    })}
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                    <Form noValidate onSubmit={avatarFormik.handleSubmit}>
-                        <Button varinat={"primary"} type={"submit"}>提交</Button>
-                    </Form>
-                </Modal.Body>
-            </Modal>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Project = () => (
     <div className={"feature"}>
@@ -11,9 +12,11 @@ const Project = () => (
                 <div className={"img"} style={{background:'#ffbb38'}}>Sky<br />Mall</div>
                 <div className={"desc"}>简约的B2C单用户商城</div>
             </div>
-            <div className={"feature-item hang-on"}>
-                <div className={"img"} style={{background:'#24bbff'}}>Sky<br />Chat</div>
-                <div className={"desc"}>在线聊天</div>
+            <div className={"feature-item"}>
+                <Link to={"/chat"}>
+                    <div className={"img"} style={{background:'#24bbff'}}>Sky<br />Chat</div>
+                    <div className={"desc"}>一起聊</div>
+                </Link>
             </div>
             <div className={"feature-item hang-on"}>
                 <div className={"img"} style={{background:'#00c52f'}}>2D<br />Chat</div>

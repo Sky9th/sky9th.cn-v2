@@ -7,13 +7,12 @@ import {Routes, Route, HashRouter} from "react-router-dom";
 
 import App from './pages/home/App';
 import Chat from "./pages/chat/Chat";
-import Loading from "./components/Loading";
 import store from "./services/store/store";
 import { Provider } from 'react-redux';
-import Notice from "./components/Notice";
 import Fingerprint2 from "fingerprintjs2";
 import {setFingerprint, setSessionKey} from "./services/store/reducer/profileReducer";
 import util from "./util/util";
+import Modal from "./components/modal";
 
 Fingerprint2.get({}, function (components) {
     let values = components.map(function (component) { return component.value })
@@ -33,8 +32,7 @@ ReactDOM.render(
                 <Route element={<App/>} path="/"/>
                 <Route element={<Chat/>} path="/chat"/>
             </Routes>
-            <Loading />
-            <Notice/>
+            <Modal />
         </HashRouter>
     </Provider>,
     document.getElementById('root')

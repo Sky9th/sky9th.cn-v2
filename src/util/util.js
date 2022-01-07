@@ -1,9 +1,13 @@
 import encrypt from './encrypt';
 import cookies from "./cookies";
+import form from "./form";
+import modal from "./modal";
 
 const util = {
     cookies,
-    encrypt
+    encrypt,
+    form,
+    modal
 }
 
 /**
@@ -11,7 +15,7 @@ const util = {
  * @param {String} titleText 标题
  */
 util.title = function (titleText) {
-    const processTitle = process.env.VUE_APP_TITLE || 'D2Admin'
+    const processTitle = 'Sky9th'
     window.document.title = `${processTitle}${titleText ? ` | ${titleText}` : ''}`
 }
 
